@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-main-shop',
@@ -6,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class MainShopComponent {
 
+  categoryName: string = '';
+  constructor(private route: ActivatedRoute) {}
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.categoryName = params['categoryName'];
+      
+    })
+  }
 }
