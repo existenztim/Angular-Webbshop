@@ -3,9 +3,9 @@ import { ICategory } from './ICategory';
 export interface IMovie {
   id: number;
   name: string;
-  desc: string;
+  description: string;
   price: number;
-  imgUrl: string;
+  imageUrl: string;
   year: number;
   productCategory: ICategory[];
 }

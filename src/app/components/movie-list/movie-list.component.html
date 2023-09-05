@@ -1,1 +1,17 @@
 <p>movie-list works!</p>
+<div>
+    <ul class="flex flex-wrap justify-center gap-6 list-none">
+        <li class="bg-slate-400 w-80 rounded" *ngFor="let movie of movieList">
+            <h2>{{movie.name}}</h2>
+            <img src="{{movie.imageUrl}}" alt=" poster of : {{movie.name}}">
+            <p>{{movie.description}}</p>
+            <p>{{movie.price}}</p>
+            <p>{{movie.year}}</p>
+            <ul>
+                <li *ngFor="let category of movie.productCategory">
+                    Genre : {{ category.category }}
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
