@@ -9,6 +9,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { CheckoutViewComponent } from './components/checkout-view/checkout-view.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { MovieSlotComponent } from './components/movie-slot/movie-slot.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,8 @@ import { MovieSlotComponent } from './components/movie-slot/movie-slot.component
     MovieListComponent,
     MovieSlotComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
