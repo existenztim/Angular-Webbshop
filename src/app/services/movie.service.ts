@@ -9,8 +9,6 @@ import { ICategory } from '../models/ICategory';
 })
 export class MovieService {
   baseUrl: string = 'https://medieinstitutet-wie-products.azurewebsites.net/api/';
-
-  protected movieList: IMovie[] = [];
   constructor(private http: HttpClient) {}
 
   getMovies(): Observable<IMovie[]> {
@@ -18,8 +16,14 @@ export class MovieService {
     return this.http.get<IMovie[]>(apiUrl);
   }
 
-  getCategories(): Observable<ICategory[]> {
-    const apiUrl = this.baseUrl + 'categories';
-    return this.http.get<ICategory[]>(apiUrl);
+  // getCategories(param: string): Observable<ICategory[]> {
+  //   const apiUrl = this.baseUrl + 'categories/' + param;
+  //   return this.http.get<ICategory[]>(apiUrl);
+  // }
+
+  filterMoviesByCategory(movies: IMovie[], categoryName: string): IMovie[] {
+    return movies.filter(movie => {
+      return movie.productCategory.some(cat => cat.category === categoryName);
+    });
   }
 }

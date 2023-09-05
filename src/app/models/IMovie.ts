@@ -5,7 +5,7 @@ export interface IMovie {
   name: string;
   description: string;
   price: number;
-  imageUrl?: string;
+  imageUrl: string;
   year: number;
   productCategory: ICategory[];
 }
