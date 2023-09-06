@@ -2,28 +2,7 @@
 <div>
     <ul class="flex flex-wrap justify-center gap-6 list-none">
         <li class="bg-slate-400 w-80 rounded relative" *ngFor="let movie of movieList">
-            <h2>{{movie.name}}</h2>
-            <div class="p-5 bg-zinc-700 flex justify-center h-96"> <img class="rounded-md" src="{{movie.imageUrl}}"
-                    (error)="handleImg($event)" alt=" poster of : {{movie.name}}" width="230" height="300">
-            </div>
-            <p>{{movie.description}}</p>
-            <p>{{movie.price}}</p>
-            <p>{{movie.year}}</p>
-            <ul class="mb-10">
-                <p>Genres : </p>
-                <li class="flex gap-2">
-                    <p *ngFor="let category of movie.productCategory">
-                        <span [class]="category.category">
-                            {{category.category }}
-                        </span>
-                    </p>
-                </li>
-            </ul>
-            <!-- Lägg till logik för att lägga in inkorg här -->
-            <form class="flex justify-center m-auto absolute bottom-0">
-                <input type="number" min="0" value="1">
-                <button class="bg-zinc-700 rounded-md text-white p-2">Köp</button>
-            </form>
+            <app-movie-slot [movie]="movie"></app-movie-slot>
         </li>
     </ul>
 </div>
