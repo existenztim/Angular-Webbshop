@@ -67,14 +67,14 @@ export class MainShopComponent {
   }
   
   filterMoviesByInput() {
-    const searchTextTrimmed = this.searchText.trim(); 
+    const searchTextTrimmed = this.searchText.toLowerCase().trim(); 
   
     if (searchTextTrimmed === '') {
       const copiedMovies = [...this.getData || []];
       this.movieList = this.movieService.getMoviesByCategory(copiedMovies, this.categoryName);
     } else {
       const filteredByCategory = this.movieService.getMoviesByCategory(this.getData || [], this.categoryName);
-      const filteredBySearch = filteredByCategory.filter(movie => movie.name.includes(searchTextTrimmed));
+      const filteredBySearch = filteredByCategory.filter(movie => movie.name.toLowerCase().includes(searchTextTrimmed));
       this.movieList = filteredBySearch;
     }
   }
