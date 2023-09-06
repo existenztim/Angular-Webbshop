@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ICategory } from 'src/app/models/ICategory';
 import { IMovie } from 'src/app/models/IMovie';
 import { ImageService } from 'src/app/services/image.service';
 
@@ -13,5 +14,9 @@ export class MovieSlotComponent {
 
   handleImg(event: Event) {
     this.imageService.handleBrokenImgLink(event);
+  }
+
+  trackCategoryById(index: number, category:ICategory) {
+    return category.categoryId;
   }
 }

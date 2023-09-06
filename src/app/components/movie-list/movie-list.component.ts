@@ -8,4 +8,8 @@ import { IMovie } from 'src/app/models/IMovie';
 export class MovieListComponent {
   @Input() movieList: IMovie[] = [];
 
+  trackMovieById(index: number, movie: IMovie) {
+    return movie.id;
+  }
+  
 }
