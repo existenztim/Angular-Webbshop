@@ -27,7 +27,6 @@ export class MovieService {
     });
   }
   getMoviesByInput(movies: IMovie[], searchText: string) : IMovie[]{
-    console.log(searchText);
-    return movies;
+    return movies.filter((movie) => movie.name.includes(searchText));
   }
 }

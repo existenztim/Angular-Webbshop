@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CategorySelect } from 'src/app/models/CategoryEnum';
 import { IMovie } from 'src/app/models/IMovie';
 import { MovieService } from 'src/app/services/movie.service';
 
@@ -19,7 +20,6 @@ export class MainShopComponent {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.categoryName = params['categoryName'];
-      console.log(this.categoryName);
     });
 
     if (this.getData === null) {
@@ -31,7 +31,6 @@ export class MainShopComponent {
       });
     } else {
       this.movieList = this.getData;
-      console.log(this.movieList);
       this.filterMoviesByCategory();
     }
   }
@@ -42,16 +41,16 @@ export class MainShopComponent {
         if (category.category === null) {
           switch (category.categoryId) {
             case 5:
-              category.category = 'Action';
+              category.category = CategorySelect.ACTION;
               break;
             case 6:
-              category.category = 'Thriller';
+              category.category = CategorySelect.THRILLER;
               break;
             case 7:
-              category.category = 'Comedy';
+              category.category = CategorySelect.COMEDY;
               break;
             case 8:
-              category.category = 'Sci-fi';
+              category.category = CategorySelect.SCI_FI;
               break;
             default:
               break;
@@ -68,7 +67,16 @@ export class MainShopComponent {
   }
   
   filterMoviesByInput() {
-    this.movieList = this.movieService.getMoviesByInput(this.movieList, this.searchText);
+    const searchTextTrimmed = this.searchText.trim(); 
+  
+    if (searchTextTrimmed === '') {
+      const copiedMovies = [...this.getData || []];
+      this.movieList = this.movieService.getMoviesByCategory(copiedMovies, this.categoryName);
+    } else {
+      const filteredByCategory = this.movieService.getMoviesByCategory(this.getData || [], this.categoryName);
+      const filteredBySearch = filteredByCategory.filter(movie => movie.name.includes(searchTextTrimmed));
+      this.movieList = filteredBySearch;
+    }
   }
 
 }
