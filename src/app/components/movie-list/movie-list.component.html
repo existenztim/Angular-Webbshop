@@ -1,4 +1,4 @@
-<p>movie-list works!</p>
+
 <div>
     <ul class="flex flex-wrap justify-center gap-6 list-none">
         <li class="bg-slate-400 w-80 rounded relative" *ngFor="let movie of movieList">
@@ -22,7 +22,7 @@
             <!-- Lägg till logik för att lägga in inkorg här -->
             <form class="flex justify-center m-auto absolute bottom-0">
                 <input type="number" min="0" value="1">
-                <button class="bg-zinc-700 rounded-md text-white p-2">Köp</button>
+                <button (click)="movieAdded(movie)" class="bg-zinc-700 rounded-md text-white p-2">Köp</button>
             </form>
         </li>
     </ul>
