@@ -11,7 +11,7 @@ export class MainShopComponent {
   movieList: IMovie[] = [];
   movieService: MovieService = inject(MovieService);
   getData: IMovie[] | null = localStorage.getItem('movies') ? JSON.parse(localStorage.getItem('movies')!) : null;
-
+  searchText: string = '';
   categoryName: string = '';
 
   constructor(private route: ActivatedRoute) {}
@@ -35,7 +35,7 @@ export class MainShopComponent {
       this.filterMoviesByCategory();
     }
   }
-
+ 
   setCategoryName() {
     this.movieList.forEach(movie => {
       movie.productCategory.forEach(category => {
@@ -63,7 +63,12 @@ export class MainShopComponent {
 
   filterMoviesByCategory() {
     if (this.categoryName) {
-      this.movieList = this.movieService.filterMoviesByCategory(this.movieList, this.categoryName);
+      this.movieList = this.movieService.getMoviesByCategory(this.movieList, this.categoryName);
     }
   }
+  
+  filterMoviesByInput() {
+    this.movieList = this.movieService.getMoviesByInput(this.movieList, this.searchText);
+  }
+
 }

@@ -1,6 +1,7 @@
 <h2 class="font-semibold text-center text-xl">{{ categoryName }}</h2>
 <div class="flex gap-2 mb-4 justify-center text-center">
-    <input type="text" value="" placeholder="Search...">
+    <input [(ngModel)]="searchText" type="text" value="searchText" placeholder="Search..."
+        (input)="filterMoviesByInput()">
     <button class="bg-teal-600 rounded-md text-white p-2"><a [routerLink]="''">Tillbaka</a></button>
 </div>
 
