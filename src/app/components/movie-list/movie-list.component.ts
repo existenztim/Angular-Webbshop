@@ -16,4 +16,6 @@ export class MovieListComponent {
   movieAdded(movie: IMovie) {
     this.newItem.emit(movie);
   }
+
+  
 }
