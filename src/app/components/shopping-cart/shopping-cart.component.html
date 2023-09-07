@@ -1,1 +1,19 @@
-<p>shopping-cart works!</p>
+<section class="w-full cartColors h-fit min-h-screen p-4">
+    <h2 class="text-2xl text-center">Shoppingcart</h2>
+    <ul>
+        <li class="flex flex-col text-center mt-3 h-28 gap-3 align-middle p-4" *ngFor="let item of cartItems">
+            <p class="text-green-500">{{item.product.name}}</p>
+
+            <div>
+                <div class="flex justify-evenly">
+                    <p>Price: <span class="text-green-500"> {{item.product.price}}</span></p>
+                    <p>Amount: <span class="text-green-500">
+                            {{item.amount}}
+                        </span></p>
+                </div>
+                <button class="text-red-500" (click)="removeItem(item)">X</button>
+            </div>
+
+        </li>
+    </ul>
+</section>

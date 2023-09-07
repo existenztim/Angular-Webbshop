@@ -4,4 +4,8 @@
     <button class="bg-teal-600 rounded-md text-white p-2"><a [routerLink]="''">Tillbaka</a></button>
 </div>
 
-<app-movie-list [movieList]="movieList"></app-movie-list>
+<main class="customStorePageGrid">
+    <app-shopping-cart class="w-80" [cartItems]="cartItems" (deleteItem)="deleteItem($event)"></app-shopping-cart>
+    <app-movie-list (newItem)="newItemToCart($event)" [movieList]="movieList"></app-movie-list>
+</main>
+
