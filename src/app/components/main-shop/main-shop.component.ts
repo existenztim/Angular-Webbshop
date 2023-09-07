@@ -23,7 +23,9 @@ export class MainShopComponent {
     this.route.params.subscribe(params => {
       this.categoryName = params['categoryName'];
     });
-
+    if (localStorage.getItem('cartItems')) {
+      this.cartItems = JSON.parse(localStorage.getItem('cartItems')!);
+    }
     if (this.getData === null) {
       this.movieService.getMovies().subscribe(movies => {
         this.movieList = movies;
@@ -93,6 +95,7 @@ export class MainShopComponent {
       return;
     }
     this.cartItems.push(new Movie(item.id, item, 1, this.generateRandomFiveDigitNumber()));
+    localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
 
   deleteItem(movie: Movie) {
@@ -104,5 +107,6 @@ export class MainShopComponent {
         this.cartItems.splice(index, 1);
       }
     }
+    localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
 }

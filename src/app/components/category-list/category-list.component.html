@@ -1,10 +1,10 @@
-<div class="">
-    <h1 class="text-center categoryHead text-3xl p-8">What will you be watch today?</h1>
+<div class="h-screen">
+    <h1 class="text-center bg-slate-800 text-teal-300 text-3xl p-8">What will you be watching today?</h1>
     <ul class="flex center flex-wrap justify-evenly w-3/4 ">
-        <li class="h-64 w-56 categoryList mt-8 rounded-lg shadow-xl" *ngFor="let category of categories">
+        <li class="h-64 w-56 bg-slate-800 mt-8 rounded-lg shadow-xl" *ngFor="let category of categories">
             <a [routerLink]="['/shop', category.name]">
                 <div class="h-full w-full ">
-                    <h2 class="text-center p-3 text-white text-4xl f mt-8 shadow-lg">{{category.name}}</h2>
+                    <h2 class="text-center bg-teal-700 p-3 text-white text-4xl f mt-8 shadow-lg">{{category.name}}</h2>
                 </div>
             </a>
         </li>

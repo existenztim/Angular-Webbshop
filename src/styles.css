@@ -18,13 +18,10 @@
     }
 }
 
-.cartColors {
-    background-color: rgba(0, 18, 42, 0.926);
-    color: rgb(71, 214, 221);
-    ul>li {
+.customColor {
         background-color: rgba(10, 136, 158, 0.354);
         color: white;
-    }
+ 
 }
 
 .customStorePageGrid {
