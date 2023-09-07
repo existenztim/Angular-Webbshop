@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CategorySelect } from 'src/app/models/CategoryEnum';
 import { IMovie } from 'src/app/models/IMovie';
 import { Movie } from 'src/app/models/Movie';
 import { MovieService } from 'src/app/services/movie.service';
@@ -12,6 +13,7 @@ export class MainShopComponent {
   movieList: IMovie[] = [];
   movieService: MovieService = inject(MovieService);
   getData: IMovie[] | null = localStorage.getItem('movies') ? JSON.parse(localStorage.getItem('movies')!) : null;
+  searchText: string = '';
   cartItems: Movie[] = [];
   categoryName: string = '';
 
@@ -31,27 +33,26 @@ export class MainShopComponent {
       });
     } else {
       this.movieList = this.getData;
-      console.log(this.movieList);
       this.filterMoviesByCategory();
     }
   }
-
+ 
   setCategoryName() {
     this.movieList.forEach(movie => {
       movie.productCategory.forEach(category => {
         if (category.category === null) {
           switch (category.categoryId) {
             case 5:
-              category.category = 'Action';
+              category.category = CategorySelect.ACTION;
               break;
             case 6:
-              category.category = 'Thriller';
+              category.category = CategorySelect.THRILLER;
               break;
             case 7:
-              category.category = 'Comedy';
+              category.category = CategorySelect.COMEDY;
               break;
             case 8:
-              category.category = 'Sci-fi';
+              category.category = CategorySelect.SCI_FI;
               break;
             default:
               break;
@@ -63,9 +64,23 @@ export class MainShopComponent {
 
   filterMoviesByCategory() {
     if (this.categoryName) {
-      this.movieList = this.movieService.filterMoviesByCategory(this.movieList, this.categoryName);
+      this.movieList = this.movieService.getMoviesByCategory(this.movieList, this.categoryName);
     }
   }
+  
+  filterMoviesByInput() {
+    const searchTextTrimmed = this.searchText.toLowerCase().trim(); 
+  
+    if (searchTextTrimmed === '') {
+      const copiedMovies = [...this.getData || []];
+      this.movieList = this.movieService.getMoviesByCategory(copiedMovies, this.categoryName);
+    } else {
+      const filteredByCategory = this.movieService.getMoviesByCategory(this.getData || [], this.categoryName);
+      const filteredBySearch = filteredByCategory.filter(movie => movie.name.toLowerCase().includes(searchTextTrimmed));
+      this.movieList = filteredBySearch;
+    }
+  }
+
 
   generateRandomFiveDigitNumber(): number {
     return Math.floor(Math.random() * (99999 - 10000 + 1) + 10000);

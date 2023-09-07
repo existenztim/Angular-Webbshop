@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IMovie } from '../models/IMovie';
-import { ICategory } from '../models/ICategory';
+//import { ICategory } from '../models/ICategory';
 
 @Injectable({
   providedIn: 'root',
@@ -21,9 +21,12 @@ export class MovieService {
   //   return this.http.get<ICategory[]>(apiUrl);
   // }
 
-  filterMoviesByCategory(movies: IMovie[], categoryName: string): IMovie[] {
+  getMoviesByCategory(movies: IMovie[], categoryName: string): IMovie[] {
     return movies.filter(movie => {
       return movie.productCategory.some(cat => cat.category === categoryName);
     });
+  }
+  getMoviesByInput(movies: IMovie[], searchText: string) : IMovie[]{
+    return movies.filter((movie) => movie.name.includes(searchText));
   }
 }

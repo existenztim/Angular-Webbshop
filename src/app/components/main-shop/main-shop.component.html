@@ -1,8 +1,17 @@
-<h2 class="font-semibold text-center text-xl">{{ categoryName }}</h2>
-<div class="flex gap-2 mb-4 justify-center text-center">
-    <input type="text" value="" placeholder="Search...">
-    <button class="bg-teal-600 rounded-md text-white p-2"><a [routerLink]="''">Tillbaka</a></button>
+<h2 class="font-semibold text-center text-6xl m-1 mb-2">{{ categoryName }}</h2>
+<div class="flex gap-2 mb-4 justify-center text-center items-center">
+    <div class="bg-teal-600 p-2 rounded-md">
+        <input [(ngModel)]="searchText" type="text" value="searchText" placeholder="Search..."
+            (input)="filterMoviesByInput()">
+    </div>
+    <button class="bg-teal-600 rounded-md text-white p-2 border-2 border-solid border-slate-800"><a
+            [routerLink]="''">Back to categories -></a></button>
 </div>
+<p class="flex justify-center gap-1 w-32 m-auto bg-slate-800 text-slate-200 rounded-sm mb-3"
+    *ngIf="searchText.length > 0">
+    <span class="text-teal-600">{{movieList.length}} </span>
+    matching titles.
+</p>
 
 <main class="customStorePageGrid">
     <app-shopping-cart class="w-80" [cartItems]="cartItems" (deleteItem)="deleteItem($event)"></app-shopping-cart>
