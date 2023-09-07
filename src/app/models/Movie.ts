@@ -12,6 +12,6 @@ export class Movie {
     public product: IMovie,
     public amount: number,
     public orderId: number,
-    public id?: number
+    public id?: number,
   ) {}
 }

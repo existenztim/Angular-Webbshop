@@ -81,7 +81,6 @@ export class MainShopComponent {
     }
   }
 
-
   generateRandomFiveDigitNumber(): number {
     return Math.floor(Math.random() * (99999 - 10000 + 1) + 10000);
   }
@@ -93,6 +92,7 @@ export class MainShopComponent {
       return;
     }
     this.cartItems.push(new Movie(item.id, item, 1, this.generateRandomFiveDigitNumber()));
+    console.log(this.cartItems)
   }
 
   deleteItem(movie: Movie) {

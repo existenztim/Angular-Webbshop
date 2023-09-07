@@ -12,9 +12,7 @@
     <span class="text-teal-600">{{movieList.length}} </span>
     matching titles.
 </p>
-
 <main class="customStorePageGrid">
     <app-shopping-cart class="w-80" [cartItems]="cartItems" (deleteItem)="deleteItem($event)"></app-shopping-cart>
     <app-movie-list (newItem)="newItemToCart($event)" [movieList]="movieList"></app-movie-list>
 </main>
-

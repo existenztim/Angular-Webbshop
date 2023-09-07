@@ -1,1 +1,33 @@
-<p>checkout-view works!</p>
+<p class="text-slate-950">checkout-view works!</p>
+<a [routerLink]="['']">Head back</a>
+<ul>
+    <p>order.id 💚</p>
+    <p>order.companyId ❤️ --> fixa i checkoutView</p>
+    <p>order.created ❤️ --> fixa i checkoutView</p>
+    <p>order.paymentMethod ❤️ --> fixa i checkoutView</p>
+    <p>order.totalPrice ❤️ --> fixa i shoppingCart</p>
+    <p>order.status ❤️ --> fixa i checkoutView</p>
+    <p>order.orderRows 💚</p>
+    <li class="flex flex-col gap-4" *ngFor="let orders of cartItems">
+        <div class="bg-slate-400 m-6">
+            <hr>
+            <p class="font-extrabold">order relaterat</p>
+            <hr>
+            <p>orders.id: {{ orders.id}}</p>
+            <p>orders.productId: {{ orders.productId}}</p>
+            <p>orders.product(object): {{ orders.product}}</p>
+            <p>orders.amount: {{ orders.amount}}</p>
+            <p>orders.orderId: {{ orders.orderId}}</p>
+            <hr>
+            <p class="font-extrabold">productrelaterat</p>
+            <hr>
+            <p>orders.product.name:{{ orders.product.id}}</p>
+            <p>orders.product.name:{{ orders.product.name}}</p>
+            orders.product.description: {{ orders.product.description | slice:0:10 }}
+            <p>orders.product.name:{{ orders.product.price}}</p>
+            <p>orders.product.name:{{ orders.product.imageUrl}}</p>
+            <p>orders.product.name:{{ orders.product.year}}</p>
+            <p>orders.product.name:{{ orders.product.productCategory}}</p>
+        </div>
+    </li>
+</ul>
