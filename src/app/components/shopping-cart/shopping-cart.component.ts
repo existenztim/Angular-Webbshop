@@ -1,4 +1,5 @@
-import { Component} from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
+import { Movie } from 'src/app/models/Movie';
 
 
 @Component({
@@ -7,6 +8,13 @@ import { Component} from '@angular/core';
 })
 export class ShoppingCartComponent {
  
-  
+  constructor() {}
 
+  @Input() cartItems: Movie[] = [];
+  @Output() deleteItem: EventEmitter<Movie> = new EventEmitter<Movie>();
+
+
+  removeItem(movie: Movie) {
+    this.deleteItem.emit(movie);
+  }
 }

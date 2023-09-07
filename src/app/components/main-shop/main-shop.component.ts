@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategorySelect } from 'src/app/models/CategoryEnum';
 import { IMovie } from 'src/app/models/IMovie';
+import { Movie } from 'src/app/models/Movie';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class MainShopComponent {
   movieService: MovieService = inject(MovieService);
   getData: IMovie[] | null = localStorage.getItem('movies') ? JSON.parse(localStorage.getItem('movies')!) : null;
   searchText: string = '';
+  cartItems: Movie[] = [];
   categoryName: string = '';
 
   constructor(private route: ActivatedRoute) {}
@@ -79,4 +81,28 @@ export class MainShopComponent {
     }
   }
 
+
+  generateRandomFiveDigitNumber(): number {
+    return Math.floor(Math.random() * (99999 - 10000 + 1) + 10000);
+  }
+
+  newItemToCart(item: IMovie) {
+    const index = this.cartItems.findIndex(cartItem => cartItem.productId === item.id);
+    if (index !== -1) {
+      this.cartItems[index].amount++;
+      return;
+    }
+    this.cartItems.push(new Movie(item.id, item, 1, this.generateRandomFiveDigitNumber()));
+  }
+
+  deleteItem(movie: Movie) {
+    const index = this.cartItems.findIndex(cartItem => cartItem.productId === movie.productId);
+    if (index !== -1) {
+      if (this.cartItems[index].amount > 1) {
+        this.cartItems[index].amount--;
+      } else {
+        this.cartItems.splice(index, 1);
+      }
+    }
+  }
 }
