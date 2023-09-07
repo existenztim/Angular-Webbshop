@@ -1,6 +1,11 @@
-<p>{{ categoryName }}</p>
-<a [routerLink]="''">Tillbaka</a>
+<h2 class="font-semibold text-center text-xl">{{ categoryName }}</h2>
+<div class="flex gap-2 mb-4 justify-center text-center">
+    <input type="text" value="" placeholder="Search...">
+    <button class="bg-teal-600 rounded-md text-white p-2"><a [routerLink]="''">Tillbaka</a></button>
+</div>
+
 <main class="customStorePageGrid">
     <app-shopping-cart class="w-80" [cartItems]="cartItems" (deleteItem)="deleteItem($event)"></app-shopping-cart>
     <app-movie-list (newItem)="newItemToCart($event)" [movieList]="movieList"></app-movie-list>
 </main>
+
