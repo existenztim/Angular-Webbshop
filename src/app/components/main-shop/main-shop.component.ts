@@ -73,7 +73,6 @@ export class MainShopComponent {
 
   newItemToCart(item: IMovie) {
     const index = this.cartItems.findIndex(cartItem => cartItem.productId === item.id);
-    console.log(item)
     if (index !== -1) {
       this.cartItems[index].amount++;
       return;
