@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { IMovie } from 'src/app/models/IMovie';
-import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -9,9 +8,8 @@ import { ImageService } from 'src/app/services/image.service';
 export class MovieListComponent {
   @Input() movieList: IMovie[] = [];
 
-  constructor(private imageService: ImageService) {}
-
-  handleImg(event: Event) {
-    this.imageService.handleBrokenImgLink(event);
+  trackMovieById(index: number, movie: IMovie) {
+    return movie.id;
   }
+  
 }
