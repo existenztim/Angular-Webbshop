@@ -26,7 +26,7 @@ export class MovieService {
       return movie.productCategory.some(cat => cat.category === categoryName);
     });
   }
-  getMoviesByInput(movies: IMovie[], searchText: string) : IMovie[]{
-    return movies.filter((movie) => movie.name.includes(searchText));
+  getMoviesByInput(movies: IMovie[], searchText: string): IMovie[] {
+    return movies.filter(movie => movie.name.includes(searchText));
   }
 }

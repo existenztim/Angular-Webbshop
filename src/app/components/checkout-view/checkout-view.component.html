@@ -1,37 +1,47 @@
-<button class="bg-teal-600 rounded-md text-white p-2"><a [routerLink]="['']">Head back</a></button>
-<h3 class="m-auto text-center">Summary:</h3>
-<ul>
-    <li class="flex flex-col gap-4 m-4" *ngFor="let orders of cartItems">
-        <div class="bg-slate-800 text-slate-200 m-auto flex flex-wrap w-auto p-3 rounded-sm">
-            <!-- <p class="font-extrabold">{{orders.orderId}}</p>  genereras först när man checkat ut-->
-            <div class="p-5 bg-teal-600 flex justify-center h-52 rounded-sm"> <img class="rounded-md"
-                    src="{{orders.product.imageUrl}}" alt=" poster of : {{orders.product.name}}" width="130"
-                    height="300">
-            </div>
-            <div class="p-3">
-                <p>Item number: {{ orders.id}}</p>
-                <p>Product name: {{ orders.product.name}}</p>
-                <p>Quantity: {{ orders.amount}} x {{orders.product.price}} sek each.</p>
-                <p>Total Amount : {{ orders.product.price * orders.amount}} sek.</p>
-            </div>
+<div class="cart-container">
+    <button class="bg-teal-600 flex rounded-md text-white p-2 text-center m-auto my-2"><a [routerLink]="['']">Head
+            back</a></button>
+    <div>
+        <h3 class="m-auto text-center">Summary: 🛒</h3>
+        <ul>
+            <li class="flex flex-col gap-4 max-w-2xl m-auto my-4" *ngFor="let orders of cartItems">
+                <div class="bg-slate-800 text-slate-200 m-auto flex flex-wrap w-full p-3 rounded-sm">
+                    <!-- <p class="font-extrabold">{{orders.orderId}}</p>  genereras först när man checkat ut-->
+                    <div class="p-5 bg-teal-600 flex justify-center h-52 rounded-sm"> <img class="rounded-md"
+                            src="{{orders.product.imageUrl}}" alt=" poster of : {{orders.product.name}}" width="130"
+                            height="300">
+                    </div>
+                    <div class="p-3 flex flex-col justify-between">
+                        <p>Item number: {{ orders.id}}</p>
+                        <p>Product name: {{ orders.product.name}}</p>
+                        <p>Quantity: {{ orders.amount}} x {{orders.product.price}} sek each.</p>
+                        <p>Total Amount : {{ orders.product.price * orders.amount}} sek.</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div> <!-- hårdkodat tills vi har ett riktigt värde -->
+        <p class="m-auto text-center">Total prize : 536 sek.</p>
+        <!-- <p>{{order.totalPrice}}</p>   -->
+        <h3 class="m-auto text-center">Your details :</h3>
+        <form [formGroup]="checkoutForm" (submit)="submitCheckoutForm($event)"
+            class="flex flex-col gap-1 max-w-md justify-center m-auto my-4">
 
-            <!-- <p>orders.product.name:{{ orders.product.id}}</p>
-            <p>orders.product.name:{{ orders.product.name}}</p>
-            orders.product.description: {{ orders.product.description | slice:0:10 }}
-            <p>orders.product.name:{{ orders.product.price}}</p>
-            <p>orders.product.name:{{ orders.product.imageUrl}}</p>
-            <p>orders.product.name:{{ orders.product.year}}</p>
-            <p>orders.product.name:{{ orders.product.productCategory}}</p> -->
-        </div>
-    </li>
-</ul>
-<h3 class="m-auto text-center">Your details :</h3>
-<form class="flex flex-col gap-1 max-w-md justify-center text-center m-auto">
-    <input type="text" placeholder="Firstname...">
-    <input type="text" placeholder="Surname...">
-    <select>
-        <option>Paypal</option>
-        <option>Card</option>
-    </select>
-    <button class="bg-teal-600 rounded-md text-white p-2">Buy</button>
-</form>
+            <label for="first-name">First name:</label>
+            <input id="first-name" type="text" formControlName="firstName">
+
+            <label for="sur-name">Surname:</label>
+            <input id="sur-name" type="text" formControlName="surName">
+
+            <label for="payment-method">Payment method:</label>
+            <select id="payment-method" type="text" class="bg-teal-600 p-2 text-slate-200"
+                formControlName="paymentMethod">
+                <option value="" disabled selected>--Please choose a payment method--</option>
+                <option value="PayPal">PayPal</option>
+                <option value="Card">Card</option>
+            </select>
+            <button type="submit" class="bg-teal-600 rounded-md text-white p-2">Buy</button>
+        </form>
+    </div>
+</div>
