@@ -13,9 +13,11 @@
 
 .categoryList {
     background-color: rgba(0, 18, 42, 0.926);
-    a>div>h2 {
-        background-color: rgba(52, 149, 155, 0.928);
-    }
+  
+}
+
+.categoryList a > div > h2 {
+    background-color: rgba(52, 149, 155, 0.928);
 }
 
 .customColor {

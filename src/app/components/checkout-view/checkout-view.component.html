@@ -1,33 +1,37 @@
-<p class="text-slate-950">checkout-view works!</p>
-<a [routerLink]="['']">Head back</a>
+<button class="bg-teal-600 rounded-md text-white p-2"><a [routerLink]="['']">Head back</a></button>
+<h3 class="m-auto text-center">Summary:</h3>
 <ul>
-    <p>order.id 💚</p>
-    <p>order.companyId ❤️ --> fixa i checkoutView</p>
-    <p>order.created ❤️ --> fixa i checkoutView</p>
-    <p>order.paymentMethod ❤️ --> fixa i checkoutView</p>
-    <p>order.totalPrice ❤️ --> fixa i shoppingCart</p>
-    <p>order.status ❤️ --> fixa i checkoutView</p>
-    <p>order.orderRows 💚</p>
-    <li class="flex flex-col gap-4" *ngFor="let orders of cartItems">
-        <div class="bg-slate-400 m-6">
-            <hr>
-            <p class="font-extrabold">order relaterat</p>
-            <hr>
-            <p>orders.id: {{ orders.id}}</p>
-            <p>orders.productId: {{ orders.productId}}</p>
-            <p>orders.product(object): {{ orders.product}}</p>
-            <p>orders.amount: {{ orders.amount}}</p>
-            <p>orders.orderId: {{ orders.orderId}}</p>
-            <hr>
-            <p class="font-extrabold">productrelaterat</p>
-            <hr>
-            <p>orders.product.name:{{ orders.product.id}}</p>
+    <li class="flex flex-col gap-4 m-4" *ngFor="let orders of cartItems">
+        <div class="bg-slate-800 text-slate-200 m-auto flex flex-wrap w-auto p-3 rounded-sm">
+            <!-- <p class="font-extrabold">{{orders.orderId}}</p>  genereras först när man checkat ut-->
+            <div class="p-5 bg-teal-600 flex justify-center h-52 rounded-sm"> <img class="rounded-md"
+                    src="{{orders.product.imageUrl}}" alt=" poster of : {{orders.product.name}}" width="130"
+                    height="300">
+            </div>
+            <div class="p-3">
+                <p>Item number: {{ orders.id}}</p>
+                <p>Product name: {{ orders.product.name}}</p>
+                <p>Quantity: {{ orders.amount}} x {{orders.product.price}} sek each.</p>
+                <p>Total Amount : {{ orders.product.price * orders.amount}} sek.</p>
+            </div>
+
+            <!-- <p>orders.product.name:{{ orders.product.id}}</p>
             <p>orders.product.name:{{ orders.product.name}}</p>
             orders.product.description: {{ orders.product.description | slice:0:10 }}
             <p>orders.product.name:{{ orders.product.price}}</p>
             <p>orders.product.name:{{ orders.product.imageUrl}}</p>
             <p>orders.product.name:{{ orders.product.year}}</p>
-            <p>orders.product.name:{{ orders.product.productCategory}}</p>
+            <p>orders.product.name:{{ orders.product.productCategory}}</p> -->
         </div>
     </li>
 </ul>
+<h3 class="m-auto text-center">Your details :</h3>
+<form class="flex flex-col gap-1 max-w-md justify-center text-center m-auto">
+    <input type="text" placeholder="Firstname...">
+    <input type="text" placeholder="Surname...">
+    <select>
+        <option>Paypal</option>
+        <option>Card</option>
+    </select>
+    <button class="bg-teal-600 rounded-md text-white p-2">Buy</button>
+</form>
