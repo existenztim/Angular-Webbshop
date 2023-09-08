@@ -4,8 +4,8 @@ import { CategoryListComponent } from './components/category-list/category-list.
 import { MainShopComponent } from './components/main-shop/main-shop.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/category', pathMatch: 'full' },
-  { path: 'category', component: CategoryListComponent},
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: CategoryListComponent},
   { path: 'shop/:categoryName', component: MainShopComponent },
 
 ];

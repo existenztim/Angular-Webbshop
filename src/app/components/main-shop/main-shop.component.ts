@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategorySelect } from 'src/app/models/CategoryEnum';
 import { IMovie } from 'src/app/models/IMovie';
 import { Movie } from 'src/app/models/Movie';
@@ -17,15 +17,21 @@ export class MainShopComponent {
   cartItems: Movie[] = [];
   categoryName: string = '';
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.categoryName = params['categoryName'];
+      this.movieSerive();
     });
     if (localStorage.getItem('cartItems')) {
       this.cartItems = JSON.parse(localStorage.getItem('cartItems')!);
     }
+   
+  }
+
+  
+  movieSerive() {
     if (this.getData === null) {
       this.movieService.getMovies().subscribe(movies => {
         this.movieList = movies;
@@ -37,6 +43,11 @@ export class MainShopComponent {
       this.movieList = this.getData;
       this.filterMoviesByCategory();
     }
+  }
+
+
+  navigateToCategory(categoryName: string) {
+    this.router.navigate(['/shop', categoryName]);
   }
  
   setCategoryName() {
@@ -94,7 +105,7 @@ export class MainShopComponent {
       this.cartItems[index].amount++;
       return;
     }
-    this.cartItems.push(new Movie(item.id, item, 1, this.generateRandomFiveDigitNumber()));
+    this.cartItems.push(new Movie(item.id, item, 1, 0, this.generateRandomFiveDigitNumber()));
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
 
