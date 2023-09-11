@@ -11,7 +11,7 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class CheckoutViewComponent {
   cartItems: Movie[] = [];
-  order = new Order(0, '', '', '', 0, this.cartItems);
+  order = new Order(Math.floor(Math.random() * 90000) + 10000,0, '', '', '',0, 0, this.cartItems);
   formResponse = false;
   userCredentials = {
     firstName: '',
@@ -48,21 +48,24 @@ export class CheckoutViewComponent {
 
       this.order.createdBy = `${this.userCredentials.firstName} ${this.userCredentials.surName}`;
       this.order.paymentMethod = this.userCredentials.paymentMethod;
-      this.order.created = new Date().toString();
-      console.log("order:", this.order);
+      this.order.created = "0001-01-01T00:00:00";
       this.formResponse = !this.formResponse;
       this.setOrderIdForItems(this.order);
+      console.log("order:", this.order);
       this.checkoutForm.reset();
-      this.orderService.postOrder(this.order).subscribe(
-        (response) => {
-          // Handle success
-          console.log("Woho Order successfully sent:", response);
+
+      this.orderService.postOrder(this.order).subscribe({
+        next: (response) => {
+          console.log("Order successfully sent:", response);
         },
-        (error) => {
-          // Handle error
-          console.error("Fuck Error sending order:", error);
+        error: (error) => {
+          console.error("Error sending order:", error);
+        },
+        complete: () => {
+          console.log("Subscription completed");
         }
-      );
+      });
+      
     } else {
       this.formResponse = !this.formResponse;
       this.checkoutForm.get('firstName')?.setErrors({ 'required': true });

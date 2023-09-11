@@ -37,3 +37,11 @@ export class OrderService {
     return this.http.post<Order>(apiUrl, order);
   }
 }
+
+// postOrder(order: Order){
+//   const apiUrl = this.baseUrl;
+//   const headers = new HttpHeaders({
+//     'Content-Type': 'application/json',
+//   });
+//   return this.http.post(apiUrl, order, { headers });
+// }

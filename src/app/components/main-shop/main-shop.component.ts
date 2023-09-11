@@ -111,7 +111,7 @@ export class MainShopComponent {
       this.totalAmountOfMovies = this.orderService.calcTotalCartMovies(this.cartItems);
       return;
     }
-    this.cartItems.push(new Movie(item.id, item, 1, 0, this.generateRandomFiveDigitNumber()));
+    this.cartItems.push(new Movie(this.generateRandomFiveDigitNumber(), item.id, item, 1, 0, ));
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
     this.totalPrice = this.orderService.calcTotalPrice(this.cartItems);
     this.totalAmountOfMovies = this.orderService.calcTotalCartMovies(this.cartItems);
