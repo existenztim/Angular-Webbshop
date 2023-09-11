@@ -2,100 +2,119 @@
 @tailwind components;
 @tailwind utilities;
 
-.center{
-    margin: 0 auto;
+.center {
+  margin: 0 auto;
 }
 
 .categoryHead {
-    background-color: rgba(0, 18, 42, 0.926);
-    color: rgb(71, 214, 221);
+  background-color: rgba(0, 18, 42, 0.926);
+  color: rgb(71, 214, 221);
 }
 
 .categoryList {
-    background-color: rgba(0, 18, 42, 0.926);
-    a>div>h2 {
-        background-color: rgba(52, 149, 155, 0.928);
-    }
+  background-color: rgba(0, 18, 42, 0.926);
+}
+
+.categoryList a > div > h2 {
+  background-color: rgba(52, 149, 155, 0.928);
 }
 
 .customColor {
-        background-color: rgba(10, 136, 158, 0.354);
-        color: white;
- 
+  background-color: rgba(10, 136, 158, 0.354);
+  color: white;
 }
 
 .customStorePageGrid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
 }
 
 body {
-    background-color: rgb(233, 233, 233);
+  background-color: rgb(233, 233, 233);
 }
 
 .Action {
-    color: #a53838;
-    border: 2px solid #a53838;
-    border-radius: 5px;
-    padding: 0.2rem;
-    background-color: rgba(0, 18, 42, 0.926);
+  color: #a53838;
+  border: 2px solid #a53838;
+  border-radius: 5px;
+  padding: 0.2rem;
+  background-color: rgba(0, 18, 42, 0.926);
 }
 
 .Sci-fi {
-    color: #44bec2;
-    border: 2px solid #44bec2;
-    border-radius: 5px;
-    padding: 0.2rem;
-    background-color: rgba(0, 18, 42, 0.926);
+  color: #44bec2;
+  border: 2px solid #44bec2;
+  border-radius: 5px;
+  padding: 0.2rem;
+  background-color: rgba(0, 18, 42, 0.926);
 }
 
 .Thriller {
-    color: #4457c2;
-    border: 2px solid #4457c2;
-    border-radius: 5px;
-    padding: 0.2rem;
-    background-color: rgba(0, 18, 42, 0.926);
+  color: #4457c2;
+  border: 2px solid #4457c2;
+  border-radius: 5px;
+  padding: 0.2rem;
+  background-color: rgba(0, 18, 42, 0.926);
 }
 
 .Comedy {
-    color: #afc244;
-    border: 2px solid #afc244;
-    border-radius: 5px;
-    padding: 0.2rem;
-    background-color: rgba(0, 18, 42, 0.926);
+  color: #afc244;
+  border: 2px solid #afc244;
+  border-radius: 5px;
+  padding: 0.2rem;
+  background-color: rgba(0, 18, 42, 0.926);
 }
 
 .Action::after {
-    content: "💣";
+  content: '💣';
 }
 
 .Sci-fi::after {
-    content: "👽";
+  content: '👽';
 }
 
 .Thriller::after {
-    content: "🔪";
+  content: '🔪';
 }
 
 .Comedy::after {
-    content: "🤡";
+  content: '🤡';
 }
 
 #movie-slots {
-    animation: introEffect 0.8s ease-in-out forwards;
-    transform-style: preserve-3d;
-  }
+  animation: introEffect 0.8s ease-in-out forwards;
+  transform-style: preserve-3d;
+}
 
+.cart-container {
+  opacity: 0;
+  animation: fadeIn 0.4s ease-in-out forwards;
+}
+
+.errorInput {
+  background-color: #4457c2;
+  color: #a53838;
+}
 /* animations */
 
 @keyframes introEffect {
-    0% {
-      transform: perspective(1000px) rotateY(180deg)  translateY(-25%);
-      opacity: 0;
-    }
-    100% {
-      transform: perspective(1000px) rotateY(0) translate(0);
-      opacity: 1;
-    }
+  0% {
+    transform: perspective(1000px) rotateY(180deg) translateY(-25%);
+    opacity: 0;
   }
+  100% {
+    transform: perspective(1000px) rotateY(0) translate(0);
+    opacity: 1;
+  }
+}
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-25%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,20 +1,18 @@
 import { Movie } from './Movie';
 
 export class Order {
-  created = new Date().toString();
-  status = 0;
+  id: number;
+  status: number;
 
   constructor(
-    public id: number,
     public companyId: number,
-    created: string,
     public createdBy: string,
+    public created: string,
     public paymentMethod: string,
     public totalPrice: number,
-    status: number,
     public orderRows: Movie[]
   ) {
-    this.created = created;
-    this.status = status;
+    this.id = Math.floor(Math.random() * 90000) + 10000;
+    this.status = 0;
   }
 }

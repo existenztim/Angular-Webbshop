@@ -9,9 +9,9 @@ export class Movie {
 
   constructor(
     public productId: number,
-    public product: IMovie,
+    public product: IMovie | null,
     public amount: number,
     public orderId: number,
-    public id?: number
+    public id?: number,
   ) {}
 }
