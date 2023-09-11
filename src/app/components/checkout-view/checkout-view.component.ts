@@ -11,8 +11,6 @@ import { Order } from 'src/app/models/Order';
 export class CheckoutViewComponent {
   cartItems: Movie[] = [];
   order = new Order(0, '', '', '', 0, this.cartItems);
-  //behöver skapa createdBy, paymentMethod, created
-  //     this.created = new Date().toString();
 
   userCredentials = {
     firstName: '',
@@ -42,6 +40,11 @@ export class CheckoutViewComponent {
     this.userCredentials.firstName = this.checkoutForm.value.firstName ?? '';
     this.userCredentials.surName = this.checkoutForm.value.surName ?? '';
     this.userCredentials.paymentMethod = this.checkoutForm.value.paymentMethod ?? '';
-    console.log(this.userCredentials);
+
+    this.order.createdBy = `${this.userCredentials.firstName} ${this.userCredentials.surName}`;
+    this.order.paymentMethod = this.userCredentials.paymentMethod;
+    this.order.created = new Date().toString();
+    console.log(this.order);
+    this.checkoutForm.reset();
   }
 }

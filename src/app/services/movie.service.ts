@@ -30,3 +30,4 @@ export class MovieService {
     return movies.filter(movie => movie.name.includes(searchText));
   }
 }
+
