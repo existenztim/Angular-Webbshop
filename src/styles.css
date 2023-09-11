@@ -90,6 +90,11 @@ body {
   opacity: 0;
   animation: fadeIn 0.4s ease-in-out forwards;
 }
+
+.errorInput {
+  background-color: #4457c2;
+  color: #a53838;
+}
 /* animations */
 
 @keyframes introEffect {

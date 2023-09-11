@@ -30,7 +30,6 @@
 
             <label for="first-name">First name:</label>
             <input id="first-name" type="text" formControlName="firstName">
-
             <label for="sur-name">Surname:</label>
             <input id="sur-name" type="text" formControlName="surName">
 
@@ -43,5 +42,6 @@
             </select>
             <button class="bg-teal-600 rounded-md text-white p-2">Buy</button>
         </form>
+        <p *ngIf="formResponse" class="text-red-600">Please fill in all forms!</p>
     </div>
 </div>
