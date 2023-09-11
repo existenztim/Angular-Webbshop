@@ -1,10 +1,8 @@
 <section class="w-full bg-slate-800 text-white h-fit min-h-screen p-4" *ngIf="cartItems.length > 0">
     <h2 class="text-2xl text-teal-600 text-center">Shoppingcart</h2>
-    <ul class="flex flex-col justify-center">
-        <li class="flex flex-col text-center customColor rounded-xl mt-3 h-28 gap-3 align-middle p-4"
-            *ngFor="let item of cartItems">
+    <ul>
+        <li class="flex flex-col text-center customColor rounded-xl mt-3 h-fit gap-3 align-middle p-3" *ngFor="let item of cartItems">
             <p class="text-green-500">{{item.product?.name}}</p>
-
             <div>
                 <div class="flex justify-evenly">
                     <p>Price: <span class="text-green-500"> {{item.product?.price}}</span></p>
@@ -19,9 +17,9 @@
         <button *ngIf="cartItems.length >0" class="bg-teal-600 m-4 rounded-md text-white p-2"
             (click)="navigateToCheckout()">Checkout</button>
     </ul>
-    <div class="mt-2 flex justify-between">
+    <div class="mt-4 flex justify-between">
         <p class=""> Total Price: <span class="text-green-500">{{ totalPrice }}</span></p>
-        <p class=""> Total Amount of Movies: <span class="text-green-500">{{ totalAmountOfMovies }}</span></p>
+        <p class=""> Number Of Movies: <span class="text-green-500">{{ totalAmountOfMovies }}</span></p>
     </div>
 
 </section>
