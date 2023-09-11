@@ -34,6 +34,6 @@
 </p>
 
 <main class="customStorePageGrid">
-    <app-shopping-cart class="w-80" [cartItems]="cartItems" (deleteItem)="deleteItem($event)"></app-shopping-cart>
+    <app-shopping-cart [totalAmountOfMovies]="totalAmountOfMovies" [totalPrice]="totalPrice" class="w-80" [cartItems]="cartItems" (deleteItem)="deleteItem($event)"></app-shopping-cart>
     <app-movie-list class="mt-2" (newItem)="newItemToCart($event)" [movieList]="movieList"></app-movie-list>
 </main>
