@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Movie } from '../models/Movie';
+import { HttpClient } from '@angular/common/http';
+import { Order } from '../models/Order';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-
-  constructor() { }
+  baseUrl: string = 'https://medieinstitutet-wie-products.azurewebsites.net/api/orders'
+  constructor(private http: HttpClient) { }
 
 
   calcTotalPrice(movies: Movie[]) {
     let totalPrice = 0;
     movies.forEach(movie => {
       for(let i = 0; i < movie.amount; i++) {
-        totalPrice += movie.product.price;
+        if(movie.product)
+        {totalPrice += movie.product.price;
+        }
       }
     })
     return totalPrice;
@@ -28,4 +32,8 @@ export class OrderService {
     return totalAmountOfMovies;
   }
 
+  postOrder(order: Order){
+    const apiUrl = this.baseUrl;
+    return this.http.post<Order>(apiUrl, order);
+  }
 }
