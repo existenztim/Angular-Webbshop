@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Movie } from 'src/app/models/Movie';
 
+
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
@@ -10,7 +11,11 @@ export class ShoppingCartComponent {
   constructor(private router: Router) {}
 
   @Input() cartItems: Movie[] = [];
+  @Input() totalPrice: number = 0;
+  @Input() totalAmountOfMovies: number = 0;
   @Output() deleteItem: EventEmitter<Movie> = new EventEmitter<Movie>();
+
+  
 
   removeItem(movie: Movie) {
     this.deleteItem.emit(movie);

@@ -4,6 +4,7 @@ import { CategorySelect } from 'src/app/models/CategoryEnum';
 import { IMovie } from 'src/app/models/IMovie';
 import { Movie } from 'src/app/models/Movie';
 import { MovieService } from 'src/app/services/movie.service';
+import { OrderService } from  'src/app/services/order.service';
 
 @Component({
   selector: 'app-main-shop',
@@ -16,8 +17,10 @@ export class MainShopComponent {
   searchText: string = '';
   cartItems: Movie[] = [];
   categoryName: string = '';
+  totalPrice: number = 0;
+  totalAmountOfMovies: number = 0;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router, private orderService: OrderService) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -26,6 +29,8 @@ export class MainShopComponent {
     });
     if (localStorage.getItem('cartItems')) {
       this.cartItems = JSON.parse(localStorage.getItem('cartItems')!);
+      this.totalPrice = this.orderService.calcTotalPrice(this.cartItems);
+      this.totalAmountOfMovies = this.orderService.calcTotalCartMovies(this.cartItems);
     }
    
   }
@@ -102,10 +107,15 @@ export class MainShopComponent {
     const index = this.cartItems.findIndex(cartItem => cartItem.productId === item.id);
     if (index !== -1) {
       this.cartItems[index].amount++;
+      this.totalPrice = this.orderService.calcTotalPrice(this.cartItems);
+      this.totalAmountOfMovies = this.orderService.calcTotalCartMovies(this.cartItems);
       return;
     }
     this.cartItems.push(new Movie(item.id, item, 1, 0, this.generateRandomFiveDigitNumber()));
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+    this.totalPrice = this.orderService.calcTotalPrice(this.cartItems);
+    this.totalAmountOfMovies = this.orderService.calcTotalCartMovies(this.cartItems);
+   
   }
 
   deleteItem(movie: Movie) {
@@ -116,7 +126,10 @@ export class MainShopComponent {
       } else {
         this.cartItems.splice(index, 1);
       }
+      this.totalPrice = this.orderService.calcTotalPrice(this.cartItems);
     }
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+    this.totalPrice = this.orderService.calcTotalPrice(this.cartItems);
+    this.totalAmountOfMovies = this.orderService.calcTotalCartMovies(this.cartItems);
   }
 }
