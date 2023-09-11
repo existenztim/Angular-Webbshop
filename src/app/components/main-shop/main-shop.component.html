@@ -1,18 +1,18 @@
 <header class="bg-slate-800 text-teal-700 p-2">
     <h2 class="font-semibold text-center text-6xl m-1 mb-2">{{ categoryName }}</h2>
     <nav class="m-4">
-        <ul class="flex center flex-wrap justify-evenly w-3/4 ">
-            <li (click)="navigateToCategory('Action')" class=" Action cursor-pointer">
+        <ul class="flex center flex-wrap justify-center gap-4 w-3/4 ">
+            <li (click)="navigateToCategory('Action')" class=" Action cursor-pointer text-4xl">
                 Action
             </li>
-            <li (click)="navigateToCategory('Thriller')" class="Thriller cursor-pointer">
+            <li (click)="navigateToCategory('Thriller')" class="Thriller cursor-pointer text-4xl">
                 Thriller
             </li>
 
-            <li (click)="navigateToCategory('Comedy')" class="Comedy cursor-pointer">
+            <li (click)="navigateToCategory('Comedy')" class="Comedy cursor-pointer text-4xl">
                 Comedy
             </li>
-            <li (click)="navigateToCategory('Sci-fi')" class="Sci-fi cursor-pointer">
+            <li (click)="navigateToCategory('Sci-fi')" class="Sci-fi cursor-pointer text-4xl">
                 Sci-fi
             </li>
         </ul>
@@ -24,7 +24,7 @@
         <input [(ngModel)]="searchText" type="text" value="searchText" placeholder="Search..."
             (input)="filterMoviesByInput()">
     </div>
-    <button class="border-teal-600 rounded-md p-2 border-2 border-solid text-teal-600"><a [routerLink]="''">Back
+    <button class="border-teal-600 rounded-md p-2 border-2 border-solid text-teal-600"><a [routerLink]="''">Home
             -></a></button>
 </div>
 <p class="flex justify-center gap-1 w-32 m-auto bg-slate-800 text-slate-200 rounded-sm mb-3"
@@ -33,6 +33,8 @@
     matching titles.
 </p>
 <main class="customStorePageGrid">
-    <app-shopping-cart [totalAmountOfMovies]="totalAmountOfMovies" [totalPrice]="totalPrice" class="w-80" [cartItems]="cartItems" (deleteItem)="deleteItem($event)"></app-shopping-cart>
-    <app-movie-list class="mt-2" (newItem)="newItemToCart($event)" [movieList]="movieList"></app-movie-list>
+    <app-shopping-cart [totalAmountOfMovies]="totalAmountOfMovies" [totalPrice]="totalPrice" [cartItems]="cartItems"
+        (deleteItem)="deleteItem($event)"></app-shopping-cart>
+    <app-movie-list class="mt-2 flex justify-center m-auto" (newItem)="newItemToCart($event)"
+        [movieList]="movieList"></app-movie-list>
 </main>

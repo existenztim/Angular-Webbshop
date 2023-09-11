@@ -31,17 +31,10 @@ export class OrderService {
     })
     return totalAmountOfMovies;
   }
-
+  // baseUrl: string = 'https://medieinstitutet-wie-products.azurewebsites.net/api/orders'
   postOrder(order: Order){
     const apiUrl = this.baseUrl;
     return this.http.post<Order>(apiUrl, order);
   }
 }
 
-// postOrder(order: Order){
-//   const apiUrl = this.baseUrl;
-//   const headers = new HttpHeaders({
-//     'Content-Type': 'application/json',
-//   });
-//   return this.http.post(apiUrl, order, { headers });
-// }

@@ -5,7 +5,7 @@
 <p>{{movie.description}}</p>
 <p><span>Price:</span> {{movie.price}} sek.</p>
 <p><span>Year:</span> {{movie.year}}</p>
-<ul class="mb-10">
+<ul class="">
     <p class="mb-2">Genres : </p>
     <li class="flex gap-2">
         <p *ngFor="let category of movie.productCategory; trackBy: trackCategoryById">
@@ -16,6 +16,6 @@
     </li>
 </ul>
 
-<form class="flex justify-center m-auto absolute bottom-0">
+<form class="flex justify-center m-auto ">
     <button (click)="handleNewMovie(movie)" class="bg-teal-600 rounded-md text-white p-2">Köp</button>
 </form>

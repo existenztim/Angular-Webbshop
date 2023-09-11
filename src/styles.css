@@ -25,12 +25,7 @@
 }
 
 .customStorePageGrid {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-}
-
-body {
-  background-color: rgb(233, 233, 233);
+  display: flex;
 }
 
 .Action {
@@ -39,6 +34,7 @@ body {
   border-radius: 5px;
   padding: 0.2rem;
   background-color: rgba(0, 18, 42, 0.926);
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .Sci-fi {
@@ -47,6 +43,7 @@ body {
   border-radius: 5px;
   padding: 0.2rem;
   background-color: rgba(0, 18, 42, 0.926);
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .Thriller {
@@ -55,6 +52,7 @@ body {
   border-radius: 5px;
   padding: 0.2rem;
   background-color: rgba(0, 18, 42, 0.926);
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .Comedy {
@@ -63,6 +61,11 @@ body {
   border-radius: 5px;
   padding: 0.2rem;
   background-color: rgba(0, 18, 42, 0.926);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.Comedy:hover, .Action:hover, .Thriller:hover, .Sci-fi:hover {
+  transform: scale(1.05);
+  background-color: rgba(38, 70, 59, 0.926);
 }
 
 .Action::after {
@@ -86,7 +89,7 @@ body {
   transform-style: preserve-3d;
 }
 
-.cart-container {
+.cart-container, .cart {
   opacity: 0;
   animation: fadeIn 0.4s ease-in-out forwards;
 }
