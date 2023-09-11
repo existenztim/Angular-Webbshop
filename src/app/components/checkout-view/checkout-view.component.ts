@@ -49,14 +49,33 @@ export class CheckoutViewComponent {
       this.order.createdBy = `${this.userCredentials.firstName} ${this.userCredentials.surName}`;
       this.order.paymentMethod = this.userCredentials.paymentMethod;
       this.order.created = new Date().toString();
-      console.log(this.order);
+      console.log("order:", this.order);
       this.formResponse = !this.formResponse;
-      //kalla på en function som lägger orderId på = this.order.id för alla items
+      this.setOrderIdForItems(this.order);
       this.checkoutForm.reset();
-      //this.orderService.postOrder(this.order);
+      this.orderService.postOrder(this.order).subscribe(
+        (response) => {
+          // Handle success
+          console.log("Woho Order successfully sent:", response);
+        },
+        (error) => {
+          // Handle error
+          console.error("Fuck Error sending order:", error);
+        }
+      );
     } else {
       this.formResponse = !this.formResponse;
       this.checkoutForm.get('firstName')?.setErrors({ 'required': true });
     }
+  }
+
+  setOrderIdForItems(order: Order) {
+    console.log("orderId", order.id)
+    order.orderRows.forEach(item => {
+      return (
+        item.orderId = order.id,
+        item.product = null
+        );
+    })
   }
 }

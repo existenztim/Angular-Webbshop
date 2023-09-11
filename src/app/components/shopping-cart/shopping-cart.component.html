@@ -3,11 +3,11 @@
     <ul class="flex flex-col justify-center">
         <li class="flex flex-col text-center customColor rounded-xl mt-3 h-28 gap-3 align-middle p-4"
             *ngFor="let item of cartItems">
-            <p class="text-green-500">{{item.product.name}}</p>
+            <p class="text-green-500">{{item.product?.name}}</p>
 
             <div>
                 <div class="flex justify-evenly">
-                    <p>Price: <span class="text-green-500"> {{item.product.price}}</span></p>
+                    <p>Price: <span class="text-green-500"> {{item.product?.price}}</span></p>
                     <p>Amount: <span class="text-green-500">
                             {{item.amount}}
                         </span></p>

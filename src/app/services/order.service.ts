@@ -16,7 +16,9 @@ export class OrderService {
     let totalPrice = 0;
     movies.forEach(movie => {
       for(let i = 0; i < movie.amount; i++) {
-        totalPrice += movie.product.price;
+        if(movie.product)
+        {totalPrice += movie.product.price;
+        }
       }
     })
     return totalPrice;
