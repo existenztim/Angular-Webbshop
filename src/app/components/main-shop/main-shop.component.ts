@@ -35,7 +35,6 @@ export class MainShopComponent {
    
   }
 
-  
   movieSerive() {
     if (this.getData === null) {
       this.movieService.getMovies().subscribe(movies => {
@@ -111,7 +110,7 @@ export class MainShopComponent {
       this.totalAmountOfMovies = this.orderService.calcTotalCartMovies(this.cartItems);
       return;
     }
-    this.cartItems.push(new Movie(item.id, item, 1, 0, this.generateRandomFiveDigitNumber()));
+    this.cartItems.push(new Movie(item.id, item, 1));
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
     this.totalPrice = this.orderService.calcTotalPrice(this.cartItems);
     this.totalAmountOfMovies = this.orderService.calcTotalCartMovies(this.cartItems);

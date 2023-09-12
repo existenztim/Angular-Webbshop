@@ -31,9 +31,10 @@ export class OrderService {
     })
     return totalAmountOfMovies;
   }
-
+  
   postOrder(order: Order){
     const apiUrl = this.baseUrl;
     return this.http.post<Order>(apiUrl, order);
   }
 }
+

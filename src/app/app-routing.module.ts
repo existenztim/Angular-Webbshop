@@ -4,6 +4,8 @@ import { CategoryListComponent } from './components/category-list/category-list.
 import { MainShopComponent } from './components/main-shop/main-shop.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CheckoutViewComponent } from './components/checkout-view/checkout-view.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+
 
 
 const routes: Routes = [
@@ -12,6 +14,7 @@ const routes: Routes = [
   { path: 'shop/:categoryName', component: MainShopComponent },
   { path: '**', component: PageNotFoundComponent },
   { path: 'checkout', component: CheckoutViewComponent }, 
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

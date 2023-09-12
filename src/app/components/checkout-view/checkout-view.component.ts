@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Movie } from 'src/app/models/Movie';
 import { Order } from 'src/app/models/Order';
+import { ImageService } from 'src/app/services/image.service';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class CheckoutViewComponent {
   cartItems: Movie[] = [];
-  order = new Order(0, '', '', '', 0, this.cartItems);
+  order = new Order(0, '', '', '',0, 0, this.cartItems);
   formResponse = false;
   userCredentials = {
     firstName: '',
@@ -25,7 +26,7 @@ export class CheckoutViewComponent {
     paymentMethod: new FormControl('', [Validators.required]),
   });
 
-  constructor(private router: Router, private orderService: OrderService) {
+  constructor(private router: Router, private orderService: OrderService, private imageService: ImageService) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras?.state) {
       this.cartItems = navigation.extras.state['cartItems'];
@@ -38,6 +39,9 @@ export class CheckoutViewComponent {
   ngOnInit(){
     this.order.totalPrice = this.orderService.calcTotalPrice(this.cartItems);
   }
+  handleImg(event: Event) {
+    this.imageService.handleBrokenImgLink(event);
+  }
 
   submitCheckoutForm(event: Event) {
     event.preventDefault();
@@ -48,21 +52,23 @@ export class CheckoutViewComponent {
 
       this.order.createdBy = `${this.userCredentials.firstName} ${this.userCredentials.surName}`;
       this.order.paymentMethod = this.userCredentials.paymentMethod;
-      this.order.created = new Date().toString();
-      console.log("order:", this.order);
+      this.order.created = "0001-01-01T00:00:00";
       this.formResponse = !this.formResponse;
       this.setOrderIdForItems(this.order);
       this.checkoutForm.reset();
-      this.orderService.postOrder(this.order).subscribe(
-        (response) => {
-          // Handle success
-          console.log("Woho Order successfully sent:", response);
+
+      this.orderService.postOrder(this.order).subscribe({
+        next: (response) => {
+          console.log("Order successfully sent:", response);
         },
-        (error) => {
-          // Handle error
-          console.error("Fuck Error sending order:", error);
+        error: (error) => {
+          console.error("Error sending order:", error);
+        },
+        complete: () => {
+          console.log("Subscription completed");
         }
-      );
+      });
+
     } else {
       this.formResponse = !this.formResponse;
       this.checkoutForm.get('firstName')?.setErrors({ 'required': true });
@@ -70,10 +76,8 @@ export class CheckoutViewComponent {
   }
 
   setOrderIdForItems(order: Order) {
-    console.log("orderId", order.id)
     order.orderRows.forEach(item => {
       return (
-        item.orderId = order.id,
         item.product = null
         );
     })
