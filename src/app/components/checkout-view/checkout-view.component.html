@@ -1,6 +1,6 @@
 <button class="bg-teal-600 flex rounded-md text-white p-2 text-center m-auto my-2"><a [routerLink]="['']">Head
         back</a></button>
-<div class="cart-container flex m-auto justify-center gap-2">
+<div class="cart-container flex m-auto justify-center gap-12">
     <div>
         <h3 class="m-auto text-center text-lg text-teal-500">Summary: 🛒</h3>
         <ul>
@@ -21,9 +21,8 @@
             </li>
         </ul>
     </div>
-    <div> <!-- hårdkodat tills vi har ett riktigt värde -->
-        <p class="m-auto text-center text-teal-500">Total prize : {{order.totalPrice}}</p>
-        <!-- <p>{{order.totalPrice}}</p>   -->
+    <div>
+        <p class="m-auto text-center text-teal-500">Total prize : {{order.totalPrice}} sek.</p>
         <h3 class="m-auto text-center text-teal-500">Your details :</h3>
         <form [formGroup]="checkoutForm" (ngSubmit)="submitCheckoutForm($event)"
             class="flex flex-col gap-1 max-w-md justify-center m-auto my-4">

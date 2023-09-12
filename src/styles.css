@@ -98,6 +98,10 @@
   background-color: #4457c2;
   color: #a53838;
 }
+
+.buyBtn:active {
+  animation: scaleAnimation 0.2s ease-in-out;
+}
 /* animations */
 
 @keyframes introEffect {
@@ -119,5 +123,17 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes scaleAnimation {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.2);
+  }
+  100% {
+      transform: scale(1);
   }
 }

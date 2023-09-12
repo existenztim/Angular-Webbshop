@@ -12,7 +12,7 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class CheckoutViewComponent {
   cartItems: Movie[] = [];
-  order = new Order(Math.floor(Math.random() * 90000) + 10000,0, '', '', '',0, 0, this.cartItems);
+  order = new Order(0, '', '', '',0, 0, this.cartItems);
   formResponse = false;
   userCredentials = {
     firstName: '',
@@ -55,15 +55,13 @@ export class CheckoutViewComponent {
       this.order.created = "0001-01-01T00:00:00";
       this.formResponse = !this.formResponse;
       this.setOrderIdForItems(this.order);
-      console.log("order:", this.order);
-      //this.checkoutForm.reset();
+      this.checkoutForm.reset();
 
       this.orderService.postOrder(this.order).subscribe({
         next: (response) => {
           console.log("Order successfully sent:", response);
         },
         error: (error) => {
-          //hamnar här varje gång
           console.error("Error sending order:", error);
         },
         complete: () => {
@@ -78,10 +76,8 @@ export class CheckoutViewComponent {
   }
 
   setOrderIdForItems(order: Order) {
-    console.log("orderId", order.id)
     order.orderRows.forEach(item => {
       return (
-        item.orderId = order.id,
         item.product = null
         );
     })
