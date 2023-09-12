@@ -1,12 +1,11 @@
 <button class="bg-teal-600 flex rounded-md text-white p-2 text-center m-auto my-2"><a [routerLink]="['']">Head
         back</a></button>
-<div class="cart-container flex m-auto justify-center gap-12">
+<div *ngIf="!orderStatus.requested" class="cart-container flex m-auto justify-center gap-12">
     <div>
         <h3 class="m-auto text-center text-lg text-teal-500">Summary: 🛒</h3>
         <ul>
             <li class="flex flex-col gap-4 max-w-2xl m-auto my-4" *ngFor="let orders of cartItems">
                 <div class="bg-slate-800 text-slate-200 m-auto flex flex-wrap w-full p-3 rounded-sm">
-                    <!-- <p class="font-extrabold">{{orders.orderId}}</p>  genereras först när man checkat ut-->
                     <div class="p-5 bg-teal-600 flex justify-center h-52 rounded-sm"> <img class="rounded-md"
                             src="{{orders.product?.imageUrl}}" (error)="handleImg($event)"
                             alt=" poster of : {{orders.product?.name}}" width="130" height="300">
@@ -14,15 +13,15 @@
                     <div class="p-3 flex flex-col justify-between">
                         <p>Item number: {{ orders.product?.id}}</p>
                         <p>Product name: {{ orders.product?.name}}</p>
-                        <p>Quantity: {{ orders.amount}} x {{orders.product?.price}} sek each.</p>
-                        <p>Total Amount: {{ (orders.product?.price || 0) * orders.amount }} sek.</p>
+                        <p>Quantity: {{ orders.amount}} x {{orders.product?.price}} SEK each.</p>
+                        <p>Total Amount: {{ (orders.product?.price || 0) * orders.amount }} SEK.</p>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
     <div>
-        <p class="m-auto text-center text-teal-500">Total prize : {{order.totalPrice}} sek.</p>
+        <p class="m-auto text-center text-teal-500">Total prize : {{order.totalPrice}} SEK.</p>
         <h3 class="m-auto text-center text-teal-500">Your details :</h3>
         <form [formGroup]="checkoutForm" (ngSubmit)="submitCheckoutForm($event)"
             class="flex flex-col gap-1 max-w-md justify-center m-auto my-4">
@@ -38,9 +37,24 @@
                 <option value="" disabled selected>--Please choose a payment method--</option>
                 <option value="PayPal">PayPal</option>
                 <option value="Card">Card</option>
+                <option value="Bitcoin">Bitcoin</option>
             </select>
             <button class="bg-teal-600 rounded-md text-white p-2">Buy</button>
         </form>
-        <p *ngIf="formResponse" class="text-red-600">Please fill in all forms!</p>
+        <p *ngIf="formResponse" class="text-red-600 text-center">Please fill in all forms!</p>
+    </div>
+</div>
+
+<div *ngIf="orderStatus.requested" class="flex flex-col gap-3">
+    <div class="flex-col z-50 h-screen w-screen dark:bg-slate-900 bg-slate-200 flex justify-center items-center">
+        <div class="flex flex-col gap-6 p-3 rounded-lg bg-teal-600 text-slate-200 justify-center">
+            <p class="text-lg text-center">Thank you {{orderStatus.message?.createdBy}}!</p>
+            <p>Your order was sent {{ today | date:'dd/MM/yyyy HH:mm:ss' }}</p>
+            <div class="flex justify-evenly">
+                <p>{{orderStatus.message?.totalPrice}} SEK</p>
+                <p>withdrawn from : </p>
+                <p>{{orderStatus.message?.paymentMethod}}</p>
+            </div>
+        </div>
     </div>
 </div>
