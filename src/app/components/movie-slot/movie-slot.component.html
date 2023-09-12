@@ -1,1 +1,23 @@
-<p>movie-slot works!</p>
+<h3 class="font-semibold text-center text-lg">{{movie.name}}</h3>
+<div class="p-5 bg-teal-600 flex justify-center h-96 rounded-sm"> <img id="movie-slots" class="rounded-md"
+        src="{{movie.imageUrl}}" (error)="handleImg($event)" alt=" poster of : {{movie.name}}" width="230" height="300">
+</div>
+<p class="overflow-auto h-32 p-2">{{movie.description}}</p>
+<p class="p-2 text-green-500"><span class="text-slate-200">Price:</span> {{movie.price}} sek.</p>
+<p class="p-2 text-green-500"><span class="text-slate-200">Year:</span> {{movie.year}}</p>
+<ul class="p-2">
+    <p class="mb-2">Genres : </p>
+    <li class="flex gap-2 ">
+        <p *ngFor="let category of movie.productCategory; trackBy: trackCategoryById">
+            <span [class]="category.category">
+                {{category.category }}
+            </span>
+        </p>
+    </li>
+</ul>
+
+<form class="flex justify-center m-3 p-2">
+    <button (click)="handleNewMovie(movie)"
+        class="buyBtn bg-teal-600 rounded-md w-full text-white p-2 absolute bottom-0">Add
+        to cart</button>
+</form>
