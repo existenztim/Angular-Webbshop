@@ -27,6 +27,8 @@ export class CheckoutViewComponent {
     message: null as Order | null,
   };
 
+  errorMessage: string | null = null;
+
   checkoutForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     surName: new FormControl('', [Validators.required]),
@@ -57,15 +59,13 @@ export class CheckoutViewComponent {
       this.userCredentials.firstName = this.checkoutForm.value.firstName ?? '';
       this.userCredentials.surName = this.checkoutForm.value.surName ?? '';
       this.userCredentials.paymentMethod = this.checkoutForm.value.paymentMethod ?? '';
-
       this.order.createdBy = `${this.userCredentials.firstName} ${this.userCredentials.surName}`;
       this.order.paymentMethod = this.userCredentials.paymentMethod;
       this.order.created = "0001-01-01T00:00:00";
-      this.formResponse = !this.formResponse;
+      this.formResponse = false;
       this.removeProductProperties(this.order);
       this.checkoutForm.reset();
       this.sendOrder();
-      localStorage.removeItem("cartItems");
     } else {
       this.formResponse = true;
       //this.checkoutForm.get('firstName')?.setErrors({ 'required': true });
@@ -83,14 +83,16 @@ export class CheckoutViewComponent {
   sendOrder(){
     this.orderService.postOrder(this.order).subscribe({
       next: (response: Order) => {
-      this.orderStatus.requested = true;
-       this.orderStatus.message = response
+      this.orderStatus.message = response;
+      this.errorMessage = null;
       },
       error: (error) => {
         this.orderStatus.requested = true;
-        this.orderStatus.message = error
+        this.errorMessage = error.message;
       },
       complete: () => {
+        this.orderStatus.requested = true;
+        localStorage.removeItem("cartItems");
         console.log("Subscription completed");
       }
     });
