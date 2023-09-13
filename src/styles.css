@@ -89,7 +89,7 @@
   transform-style: preserve-3d;
 }
 
-.cart-container, .cart {
+.cart-container, .cart, .category-container {
   opacity: 0;
   animation: fadeIn 0.4s ease-in-out forwards;
 }
